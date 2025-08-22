@@ -30,7 +30,7 @@ public:
 
 int main(){
     double batteryCapacity = 100.0; // 100% battery This is my change
-    double normalDrain = 5.0;       // Normal power usage (5% per hour)
+    double normalDrain = 5.0;       // Normal power usage (5% per hour) This is my second change
     double lowPowerDrain = 2.0;     // Power-saving mode (2% per hour)
     int hours = 24;                 // Simulate 24 hours of usage
 
