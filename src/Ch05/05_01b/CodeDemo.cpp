@@ -10,18 +10,20 @@
 
 struct Node{
     std::string name;
-    int age;
-    char gender;
-    float weight;
+    std::string age;
+    std::string gender;
+    std::string weight;
     Node * next;
 };
 
-void appendNode(Node ** head, Node ** tail, const std::string & newName){
+void appendNode(Node ** head, Node ** tail, const std::string & newName, 
+        const std::string & newAge = "", const std::string & newGender = ""){
     Node * newNode = new Node;
     newNode->name = newName;
+    newNode->age = newAge;
+    newNode->gender = newGender;
     newNode->next = nullptr;
-    head[MAX_ENTRIES] = nullptr;
-    tail = nullptr;
+    
     if(*head == nullptr){
         *head = newNode;
         *tail = newNode;
@@ -35,7 +37,7 @@ void appendNode(Node ** head, Node ** tail, const std::string & newName){
 void printNames(Node * head){
     Node * current = head;
     while(current != nullptr){
-        std::cout << current->name << " ";
+        std::cout << current->name << " "<<current->age<<" "<<current->gender<<std::endl;
         current = current->next;
     }
     std::cout << std::endl;
@@ -50,18 +52,23 @@ void deleteList(Node * head){
 }
 
 int main(){
-    std::cout << "Enter names separated by spaces: ";
-    std::string line;
+    std::cout << "Enter data separated by comma: ";
+    std::string line, name, age, gender, token;
     std::getline(std::cin, line);
     
-    std::istringstream iss(line);
-    std::string token;
+    std::stringstream ss(line);
     
     Node * head = nullptr;
     Node * tail = nullptr;
-    while(iss >> token){
+    /*while(iss >> token){
         appendNode(&head, &tail, token);
-        iss.seekg(0);
+    }*/
+
+    while(std::getline(ss, token ,','))
+    {
+        std::istringstream iss(token);
+        iss >> name >> age >> gender;
+        appendNode(&head, &tail, name, age, gender);
     }
     
     std::cout << "The names in the linked list are: ";
